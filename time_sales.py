@@ -16,7 +16,14 @@ with open("sales.csv") as f:
         datetime_value = datetime.strptime(sales_data[0], '%Y-%m-%d %H:%M:%S')
         sales[datetime_value.strftime('%w')]+=float(sales_data[1])
 
+maximum = 0.0
+maxday = ''
+
 for ind in sales:
     print("Day {} : {} sales".format(ind,sales[ind]))
-    
+    if sales[ind] > maximum:
+        maximum = sales[ind]
+        maxday = ind
+
+print('Maximum sales {} on day {}'.format(maximum,maxday))
     
