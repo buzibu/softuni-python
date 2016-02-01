@@ -1,4 +1,5 @@
 from .base import Figure
+import math
 
 
 class Circle(Figure):
@@ -74,19 +75,19 @@ class NSide(Figure):
         self.num_sides = num_sides
 
     def draw(self, turtle):
-        half_side = self.side / 2
-        left = self.center_x - half_side
-        top = self.center_y + half_side
+        angle = 360 / self.num_sides
+        side = 2.0 * self.radius * math.sin(math.pi/self.num_sides)
+        left = self.center_x - self.radius*math.cos(math.pi/self.num_sides)
 
         turtle.penup()
-        turtle.goto(left, top)
+        turtle.goto(left, self.center_y + side / 2)
         turtle.pendown()
         turtle.color(self.color)
         turtle.forward(1)
         turtle.setheading(270)  # point the turtle down
-        for _ in range(4):
-            turtle.forward(self.side)
-            turtle.left(90)
+        for _ in range(self.num_sides):
+            turtle.forward(side)
+            turtle.left(angle)
 
 
 class Pie(Figure):
@@ -97,16 +98,12 @@ class Pie(Figure):
         self.arg_degrees = arg_degrees
 
     def draw(self, turtle):
-        half_side = self.side / 2
-        left = self.center_x - half_side
-        top = self.center_y + half_side
-
         turtle.penup()
-        turtle.goto(left, top)
+        turtle.goto(self.center_x, self.center_y)
         turtle.pendown()
         turtle.color(self.color)
-        turtle.forward(1)
-        turtle.setheading(270)  # point the turtle down
-        for _ in range(4):
-            turtle.forward(self.side)
-            turtle.left(90)
+        turtle.setheading(90)
+        turtle.forward(self.radius)
+        turtle.left(90)
+        turtle.circle(self.radius, self.arg_degrees)
+        turtle.goto(self.center_x, self.center_y)

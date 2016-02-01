@@ -1,14 +1,48 @@
 import sys
 import json
 import turtle
+import os
+import yaml
 
 from figures.base import Figure
-from figures.simple import Circle, Square
+from figures.simple import Circle, Square, Rectangle, NSide, Pie
 
 FIGURE_TYPES = {
     "circle": Circle,
     "square": Square,
+    "rectangle": Rectangle,
+    "nside": NSide,
+    "pie": Pie,
+
 }
+
+
+class Loader:
+    def __init__(self, filename):
+        # base validations
+        if os.access(filename, os.R_OK) and os.path.isfile(filename):
+            self.filename = filename
+        else:
+            raise ValueError("Inaccessible file '{}'".format(filename))
+
+    def load(self):
+        raise NotImplementedError()
+
+
+class JSONLoader(Loader):
+
+    def load(self):
+        with open(self.filename) as f:
+            input_data = json.load(f)
+            return input_data
+
+
+class YAMLLoader(Loader):
+
+    def load(self):
+        with open(self.filename) as f:
+            input_data = yaml.load(f)
+            return input_data
 
 
 def main():
@@ -26,9 +60,19 @@ def main():
 
 
 def load_input_data(input_filename):
-    with open(input_filename) as f:
-        input_data = json.load(f)
-        return input_data
+    # os.path.splitext връща tuple с 2 стойности - име и разширение на файла
+    filename, extension = os.path.splitext(input_filename)
+    loader = None
+    if extension == '.json':
+        loader = JSONLoader(input_filename)
+    elif extension == '.yaml':
+        loader = YAMLLoader(input_filename)# ... тук по същия начин ще се добави обработване на YAML файлове
+
+
+    if loader is not None:
+        return loader.load()
+    else:
+        raise ValueError("Unsupported file format: {}".format(extension))
 
 
 def create_figures(input_data: dict):

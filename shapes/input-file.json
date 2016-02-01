@@ -3,5 +3,11 @@
     {"type": "square", "center_x": 0, "center_y": 0, "side": 100, "color": "red"},
     {"type": "square", "center_x": 0, "center_y": 0, "side": 200, "color": "blue"},
     {"type": "circle", "center_x": 0, "center_y": 0, "radius": 50, "color": "blue"},
-    {"type": "circle", "center_x": 0, "center_y": 0, "radius": 100, "color": "red"}
+    {"type": "circle", "center_x": 0, "center_y": 0, "radius": 100, "color": "red"},
+    {"type": "rectangle", "center_x": 0, "center_y": 0, "width": 70, "height": 120, "color": "blue"},
+    {"type": "rectangle", "center_x": 0, "center_y": 0, "width": 100, "height": 50, "color": "red"},
+    {"type": "nside", "center_x": 0, "center_y": 0, "radius": 100, "num_sides": 6, "color": "green"},
+    {"type": "nside", "center_x": 0, "center_y": 0, "radius": 70, "num_sides": 6, "color": "red"},
+    {"type": "pie", "center_x": 0, "center_y": 0, "radius": 65, "arg_degrees": 120, "color": "red"},
+    {"type": "pie", "center_x": 0, "center_y": 0, "radius": 80, "arg_degrees": 60, "color": "blue"}
 ]
