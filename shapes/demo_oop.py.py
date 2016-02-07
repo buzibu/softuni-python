@@ -68,7 +68,6 @@ def load_input_data(input_filename):
     elif extension == '.yaml':
         loader = YAMLLoader(input_filename)# ... тук по същия начин ще се добави обработване на YAML файлове
 
-
     if loader is not None:
         return loader.load()
     else:
